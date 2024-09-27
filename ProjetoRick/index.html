@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #96bbd9ed;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Carrossel */
+        .carousel {
+            width: 100%;
+            max-width: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 450px; /* Define a altura das imagens */
+            object-fit: cover; /* Mantém o aspecto das imagens enquanto as ajusta */
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        /* Contador */
+        .counter {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Linha */
+        .divider {
+            border-top: 2px solid #000;
+            width: 80%;
+            margin: 20px 0;
+        }
+
+        /* Texto */
+        .text {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        /* Música */
+        audio {
+            display: none; /* Ocultar o player de música */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+        <img src="img1.jpg" class="active" alt="Foto 1">
+        <img src="img2.jpg" alt="Foto 2">
+        <img src="img3.jpg" alt="Foto 3">
+    </div>
+
+    <!-- Mensagem -->
+    <div class="text">Estamos juntos a: </div><br>
+
+    <!-- Contador -->
+    <div class="counter" id="countdown"></div>
+
+    <!-- Linha -->
+    <div class="divider"></div>
+
+    <!-- Texto -->
+    <div class="text">Pra você nunca esquecer do dia em que o seu sorriso roubou meu coração.<br> Te amo em todas as nossas análises e desenvolvimentos do nosso sistema! &#10084</div>
+
+    <!-- Música da web (escondida) -->
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <script>
+        // Carrossel
+        let index = 0;
+        const images = document.querySelectorAll('.carousel img');
+
+        function changeImage() {
+            images[index].classList.remove('active');
+            index = (index + 1) % images.length;
+            images[index].classList.add('active');
+        }
+
+        setInterval(changeImage, 3000); // Mudar imagem a cada 3 segundos
+
+        // Contador
+        const countdown = document.getElementById('countdown');
+        const targetDate = new Date('2024-08-21T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = now - targetDate;
+
+            const months = Math.floor(distance / (1000 * 60 * 60 * 24 * 30));
+            const days = Math.floor((distance % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `${months} Mês,  ${days} Dias,  ${hours} Horas,  ${minutes} Minutos,  ${seconds} Segundos. `;
+        }
+
+        setInterval(updateCountdown, 1000); // Atualizar contador a cada segundo
+    </script>
+
+</body>
+</html>
